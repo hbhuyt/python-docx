@@ -8,10 +8,11 @@ Feature: Access document collections
      Given a document having inline shapes
       Then document.inline_shapes is an InlineShapes object
   
-  @wip
+
   Scenario: Access the bookmarks collection of a document
-	Given a document having bookmarks
-	 Then document.bookmarks is a Bookmarks object	  
+	   Given a document having bookmarks
+	    Then document.bookmarks is a Bookmarks object
+ 
 
   Scenario: Access the paragraphs in the document body as a list
      Given a document containing three paragraphs

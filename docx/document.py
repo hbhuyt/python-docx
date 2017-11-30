@@ -28,9 +28,6 @@ class Document(ElementProxy):
         self._part = part
         self.__body = None
 
-    def bookmarks(self):
-        return Bookmarks(self._element.body)
-
     def start_bookmark(self, name):
         return self._body.start_bookmark(name)
 
@@ -135,6 +132,10 @@ class Document(ElementProxy):
         marks such as ``<w:ins>`` or ``<w:del>`` do not appear in this list.
         """
         return self._body.paragraphs
+
+    @property
+    def bookmarks(self):
+        return Bookmarks(self._element.body)
 
     @property
     def part(self):

@@ -61,7 +61,7 @@ def given_a_single_section_document_having_portrait_layout(context):
 
 @given('a document having bookmarks')
 def given_a_document_having_bookmarks(context):
-    context.document = Document(test_docx('doc-bookmark-access'))
+    context.document = Document(test_docx('doc-access-bookmarks'))
 
 
 # when ====================================================
@@ -268,6 +268,5 @@ def then_the_style_of_the_last_paragraph_is_style(context, style_name):
 
 @then('document.bookmarks is a Bookmarks object')
 def then_document_bookmarks_is_a_Bookmarks_object(context):
-    document = context.document
-    bookmarks = document.bookmarks
+    bookmarks = context.document.bookmarks
     assert isinstance(bookmarks, Bookmarks)
