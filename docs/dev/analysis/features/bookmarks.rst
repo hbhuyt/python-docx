@@ -3,24 +3,25 @@ Bookmarks
 =========
 
 WordprocessingML allows for custom specification of bookmarks at different 
-locations wihin the document. The bookmarks object will therefore be available 
+locations within the document. The bookmarks object will therefore be available 
 from the main document API. The location will be docx.document.
 The bookmarks object will be a list like sequence object, it will be possible 
-to interate through the different bookmarks. A __len__ property is also 
+to iterate through the different bookmarks. A __len__ property is also 
 required to provide the bookmark a unique id, to go along with a new bookmark. 
-A boomark is a seperate object which has no particular place, therefore the 
+A bookmark is a separate object which has no particular place, therefore the 
 both the Bookmark and the Bookmarks objects will be placed in the 
 docx.text.bookmark location. 
 
 A Bookmark object has two properties, a name and an id which has to be 
-identical within a single bookmark. A Bookmark object can be placed in 
-a run or a paragraph and consists of a bookmarkStart element and a 
-bookmarkEnd element.
+identical within a single bookmark. A Bookmark can be started in 
+a run or a paragraph and ended in a different part of the document.
+A working bookmark consists of a bookmarkStart element and a 
+bookmarkEnd element, matched by unique id's.
 
 Bookmarks can be used to mark certain location in the document. Insertion
 of a bookmark can be done from either document, paragraph or run level.
 
-Ther are many applications for the bookmark, many are found in the 'tracked 
+There are many applications for the bookmark, many are found in the 'tracked 
 changes' like operations in word. The intended use for this implementation lies
 more in the captions and crossrefernces. It could however also be extended to 
 also include specific cell locations in a table.
@@ -35,7 +36,6 @@ Protocol
     >>> bookmarks = document.bookmarks
     >>> bookmarks
     <docx.text.bookmark.Bookmarks object at 0x000000000>
-
     >>> bookmark = document.start_bookmark(name='test')
     # Some  code here
     >>> document.end_bookmark(bookmark)
@@ -71,7 +71,7 @@ word and has therefore a less strict location structure
 
 * The <w:bookmarkStart> element requires the <w:id> and <w:name> elements. 
 
-* The <w:bookmarkStart> element only needs to containb the <w:id>
+* The <w:bookmarkEnd> element only needs to contain the <w:id> element.
 
 Specimen XML
 ------------
