@@ -22,25 +22,23 @@ of a bookmark can be done from either document, paragraph or run level.
 
 Ther are many applications for the bookmark, many are found in the 'tracked 
 changes' like operations in word. The intended use for this implementation lies
-more in the captions and crossrefernces. It could however also be extended to also 
-include specific cell locations in a table.
+more in the captions and crossrefernces. It could however also be extended to 
+also include specific cell locations in a table.
 
 Protocol
 --------
 
 .. highlight:: python
 
-Getting and setting tab stops::
+# Adding a bookmark:
 
-    >>> boomarks = document.bookmarks
-    >>> boomarks
+    >>> bookmarks = document.bookmarks
+    >>> bookmarks
     <docx.text.bookmark.Bookmarks object at 0x000000000>
 
-    >>> bookmark = bookmarks.add_bookmark(name='test')
-
-    >>> start = bookmark.add_bookmark_start()
-    >>> end = bookmark.add_bookmark_end()
-   
+    >>> bookmark = document.start_bookmark(name='test')
+    # Some  code here
+    >>> document.end_bookmark(bookmark)
     >>> len(bookmarks)
     1
     >>> bookmarks.get(name='test')
@@ -59,7 +57,8 @@ Word is capable of redefining the id's, the bookmark names can be found in the
 cross reference dialog. 
 
 An unclosed bookmark (i.e. only a <w:bookmarkStart> element is inserted, but 
-the corresponding <W:bookmarkEnd> element is missing.) will be ignored by word. 
+the corresponding <W:bookmarkEnd> element is missing.) it will be ignored by 
+word. 
 
 
 XML Semantics
@@ -68,15 +67,11 @@ XML Semantics
 * The bookmark XML element predates the real structured XML element list of 
 word and has therefore a less strict location structure
 
-* "start" alignment is equivalent to "left", and "end" alignment are equivalent
-  to "right". (Confirmed with manually edited XML.)
+* The id's in the elements need be identical for a bookmark to work.
 
-* A "clear" tab stop is not shown in Word's tab bar and default tab behavior
-  is followed in the document. That is, Word ignores that tab stop
-  specification completely, acting as if it were not there at all.  This
-  allows a tab stop inherited from a style, for example, to be ignored.
+* The <w:bookmarkStart> element requires the <w:id> and <w:name> elements. 
 
-* the id's in the elements need be identical for a bookmark to work:
+* The <w:bookmarkStart> element only needs to containb the <w:id>
 
 Specimen XML
 ------------
